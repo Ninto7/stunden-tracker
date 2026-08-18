@@ -41,13 +41,16 @@
       "index.html",
       "style.css",
       "prisma/**/*",
-      "node_modules/@prisma/client/**/*",
       "!node_modules/.cache/**/*"
     ],
     "extraResources": [
       {
         "from": "node_modules/.prisma",
         "to": "node_modules/.prisma"
+      },
+      {
+        "from": "node_modules/@prisma/client",
+        "to": "node_modules/@prisma/client"
       }
     ],
     "asarUnpack": [
