@@ -1,0 +1,65 @@
+{
+  "name": "stunden-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ELECTRON_DISABLE_SANDBOX=1 electron -r tsx .",
+    "compile": "tsc",
+    "dist": "prisma generate && npm run compile && electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/electron": "^1.4.38",
+    "@types/node": "^26.2.0",
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3",
+    "prisma": "^6.19.3",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.4",
+    "@prisma/adapter-better-sqlite3": "^7.9.1",
+    "@prisma/adapter-libsql": "^7.9.1",
+    "@prisma/client": "^6.19.3",
+    "better-sqlite3": "^13.0.3"
+  },
+  "build": {
+    "appId": "com.deinname.stundentracker",
+    "productName": "StundenTracker",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "index.html",
+      "style.css",
+      "prisma/**/*",
+      "!node_modules/.cache/**/*"
+    ],
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*",
+      "**/node_modules/.prisma/**/*",
+      "**/node_modules/@prisma/client/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}

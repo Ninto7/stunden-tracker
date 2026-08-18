@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+
+# TypeScript / Build-Ausgaben
+dist/
+out/
+
+# Binäre Releases von electron-builder
+release/
+
+# Datenbanken & Temp-Dateien (Wichtig!)
+prisma/dev.db
+prisma/dev.db-journal
+*.db
+*.db-journal
+
+# Logs & Umgebungsvariablen
+*.log
+.env

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stunden-Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Stunden-Tracker</h1>
+      <div class="card">
+        <h2>Wähle Nutzer</h2>
+        <select id="userSelect" onchange="handleUserSelection(this)">
+          <option>Lade Nutzer...</option>
+        </select>
+      </div>
+
+      <!--create user screen-->
+      <div class="container">
+        <div class="card" hidden id="userCreateScreen">
+          <h2>Neuen Nutzer anlegen</h2>
+          <input type="text" id="userName" placeholder="Name (z.B. Nils)" />
+          <input
+            type="text"
+            id="userRate"
+            placeholder="Stundenlohn (z.B 13,90)"
+          />
+          <button onclick="createUser()">Nutzer anlegen</button>
+        </div>
+      </div>
+
+      <!--individual screen for each person-->
+      <div class="container" id="userscreen" hidden>
+        <div class="user-info-card" id="customUserScreen"> <!--Hour value and balance-->
+          <div class="info-item">
+            <h2>Aktuelles Stundenkonto</h2>
+            <strong id="Stundenkonto">-</strong>
+          </div>
+          <div class="info-item">
+            <h2>Aktuelles Konto</h2>
+            <strong id="Geldkonto">-</strong>
+          </div>
+        </div>
+        <div class="user-info-card" id="customUserScreenButtons"> <!--add Buttons-->
+          <div class="info-item">
+            <button onclick="addStunden()">Arbeitszeit Hinzufügen</button>
+          </div>
+          <div class="info-item">
+            <button onclick="addUeberweisung()">Überweisung Hinzufügen</button>
+          </div>
+        </div>
+        <div class="card" id="historyCard"> <!--History Table-->
+          <h2>Letzte Transaktionen</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Datum</th>
+                  <th>Beschreibung</th>
+                  <th style="text-align: right">Betrag (€)</th>
+                </tr>
+              </thead>
+              <tbody id="transactionList"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card" id="deleter"> <!--delete button-->
+          <button class="button-extreme" onclick="deleteClick()">Nutzer Löschen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+     <!--create Workhours-->
+    <dialog id="addStundenpopup" class="modal">
+      <div class="modal-content">
+        <h2>Arbeitszeit</h2>
+        <input
+          type="text"
+          id="timeInput"
+          placeholder="Hier Arbeitszeit in Stunden zB. 3.75"
+        />
+        <h2>Datum</h2>
+        <input type="date" id="dateInput" placeholder="Hier Datum eingeben" />
+        <div class="modal-buttons">
+          <button onclick="closeModal()">Abbrechen</button>
+          <button onclick="saveModalData()">Speichern</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!--create transaction-->
+    <dialog id="addUeberweisungpopup" class="modal">
+      <div class="modal-content">
+        <h2>Überweisung</h2>
+        <input
+          type="text"
+          id="ueberweisungsInput"
+          placeholder="Hier Überweisung in € zB. 100.50"
+        />
+        <h2>Datum</h2>
+        <input type="date" id="dateUEInput" placeholder="Hier Datum eingeben" />
+        <div class="modal-buttons">
+          <button onclick="closeUEModal()">Abbrechen</button>
+          <button onclick="saveUEModalData()">Speichern</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!--delete confirmation popup-->
+    <dialog id="confirmation" class="modal">
+      <div class="modal-content">
+        <h2>Möchtent sie wirklich diesen Nutzer löschen?</h2>
+        <button class="modal-buttons" onclick="deleteConfirmed()">Löschen</button>
+        <button class="modal-buttons" onclick="deleteCancel()">Abbrechen</button>
+      </div>
+    </dialog>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
