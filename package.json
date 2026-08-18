@@ -41,12 +41,17 @@
       "index.html",
       "style.css",
       "prisma/**/*",
+      "node_modules/@prisma/client/**/*",
       "!node_modules/.cache/**/*"
     ],
+    "extraResources": [
+      {
+        "from": "node_modules/.prisma",
+        "to": "node_modules/.prisma"
+      }
+    ],
     "asarUnpack": [
-      "**/node_modules/better-sqlite3/**/*",
-      "**/node_modules/.prisma/**/*",
-      "**/node_modules/@prisma/client/**/*"
+      "**/node_modules/better-sqlite3/**/*"
     ],
     "win": {
       "target": [
