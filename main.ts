@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { execSync } from "child_process";
@@ -31,7 +32,6 @@ const prisma = new PrismaClient({
 
 async function ensureTablesExist() {
   try {
-    // 1. Tabellen mit aktuellem Schema anlegen
     await prisma.$executeRawUnsafe(`
       CREATE TABLE IF NOT EXISTS "User" (
         "id" TEXT NOT NULL PRIMARY KEY,
@@ -60,14 +60,12 @@ async function ensureTablesExist() {
       );
     `);
 
-    // 2. Falls eine alte Tabelle existierte, in der 'stundenlohn' statt 'lohn' war:
-    // Wir versuchen 'stundenlohn' zu entfernen bzw. 'lohn' nachzurüsten.
     try {
       await prisma.$executeRawUnsafe(`
         ALTER TABLE "User" ADD COLUMN "lohn" REAL NOT NULL DEFAULT 0.0;
       `);
     } catch (_e) {
-      // 'lohn' existierte bereits, alles gut!
+
     }
 
     console.log("Datenbank erfolgreich synchronisiert.");
