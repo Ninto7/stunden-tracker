@@ -38,8 +38,8 @@
     },
     "files": [
       "dist/**/*",
-      "index.html",
-      "style.css",
+      "public/**/*",
+      "preload.js",
       "prisma/**/*",
       "!node_modules/.cache/**/*"
     ],

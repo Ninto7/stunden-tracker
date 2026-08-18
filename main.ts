@@ -80,13 +80,13 @@ function createWindow() {
     height: 700,
     title: "Stunden-Tracker",
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "../preload.js"),
       nodeIntegration: false,
       contextIsolation: true,
     },
   });
 
-  win.loadFile(path.join(__dirname, "public/index.html"));
+  win.loadFile(path.join(__dirname, "../public/index.html"));
 }
 
 app.whenReady().then(async () => {
